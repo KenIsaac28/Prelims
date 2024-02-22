@@ -1,0 +1,62 @@
+import React, { useState } from 'react';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
+
+// HomePage component
+function HomePage({ onPress }) {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <View style={{ alignItems: 'center' }}>
+        <Image source={require('./assets/FB_IMG_1666239200489.jpg')} style={{ width: 230, height: 230, borderRadius: 130 }} />
+        <Text style={{ marginTop: 10, fontSize: 22, fontWeight: 'bold' }}>JOHN KENNETH V. ISAAC</Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+// AboutPage component
+function AboutPage({ onPress }) {
+  const aboutText = (
+    <Text style={{display:'flex', fontSize: 20, textAlign: 'center' }}>
+     ABOUT ME{"\n"} Hello! My name is John Kenneth V. Isaac. I am currently studying at Global  Reciprocal Colleges and a 3rd Year College Student right now. I am also a Graphic Designer at Saint Gabriel the Archangel Parish, Diocese of Caloocan under the ministry of SOCCOM.
+    </Text> 
+  );
+
+  return (
+    <TouchableOpacity onPress={onPress} style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20 }}>
+      <Text>{aboutText}</Text>
+    </TouchableOpacity>
+  );
+}
+
+// ThirdPage component
+function ThirdPage({ onPress }) {
+  return (
+    <TouchableOpacity onPress={onPress} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={{fontSize: 24, fontWeight: 'bold', justifyContent: 'center', alignItems: 'flex-start', height: '10vh' }}>Educational Background</Text>
+       <Text style={{ fontSize: 24, fontWeight: 'regular', height: '15vh', justifyContent: 'center', alignItems: 'center'}}>Primary Education: Potrero Elementary School</Text>
+      <Text style={{ fontSize: 24, fontWeight: 'regular', height: '15vh' }}>Secondary Education: Potrero National High School</Text>
+      <Text style={{ fontSize: 24, fontWeight: 'regular', height: '15vh' }}>Tertiary Education: AMA Computer College</Text>
+      <Text style={{ fontSize: 24, fontWeight: 'regular', height: '15vh' }}>College Education: Global Reciprocal Colleges</Text>
+    </TouchableOpacity>
+  );
+}
+
+export default function App() {
+  const [currentPage, setCurrentPage] = useState('HomePage');
+
+  const handleTogglePage = () => {
+    setCurrentPage(currentPage === 'HomePage' ? 'AboutPage' : currentPage === 'AboutPage' ? 'ThirdPage' : 'HomePage');
+  };
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      {currentPage === 'HomePage' ? (
+        <HomePage onPress={handleTogglePage} />
+      ) : currentPage === 'AboutPage' ? (
+        <AboutPage onPress={handleTogglePage} />
+      ) : (
+        <ThirdPage onPress={handleTogglePage} />
+      )}
+    </View>
+  );
+}
